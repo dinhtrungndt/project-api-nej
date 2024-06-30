@@ -20,15 +20,15 @@ export class ProductService{
     ]
 
     getProducts(): Product[]{
-        return this.products;
+        return this.products
     }
 
     createProduct(): string{
         return 'POST PRODUCTS'
     }
 
-    detailProduct(): string {
-        return 'DETAIL PRODUCTS'
+    detailProduct(id: number): Product {
+        return this.products.find(item => item.id === Number(id))
     }
 
     updateProduct(): string {
