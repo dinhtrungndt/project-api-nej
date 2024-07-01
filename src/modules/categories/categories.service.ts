@@ -39,7 +39,7 @@ export class CategoriesService{
 
     updateProduct(productDto: ProductDto, id: number): Product {
         const index = this.products.findIndex(item => item.id === Number(id));
-        this.products[index].categoryId = productDto.categoryId;
+        this.products[index].categoryId = productDto.category_id;
         this.products[index].productName = productDto.productName;
         this.products[index].price = productDto.price;
         return this.products[index];
