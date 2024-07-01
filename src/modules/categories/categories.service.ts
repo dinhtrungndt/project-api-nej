@@ -1,16 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ProductDto } from 'src/dto/product.dto';
-import { CarsEntity } from 'src/entities/cars.entity';
 import { Product } from 'src/models/product.model';
-import { Repository } from 'typeorm';
 
 @Injectable()
-export class ProductService{
-    constructor(
-        @InjectRepository(CarsEntity)
-        private readonly carsRepository: Repository<CarsEntity>,
-      ) {}
+export class CategoriesService{
     
     private products: Product[] = [
         {
@@ -27,8 +20,8 @@ export class ProductService{
         }
     ]
 
-    async getProducts(): Promise<CarsEntity[]>{
-        return await this.carsRepository.find()
+    getProducts(): Product[]{
+        return this.products
     }
 
     createProduct(productDto: ProductDto): Product{

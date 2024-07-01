@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { ProductsModule } from './modules/products/products.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { AccountEntity } from './entities/account.entity';
+import { CarsEntity } from './entities/cars.entity';
+import { CategoritesEntity } from './entities/categories.entity';
 
 @Module({
   imports: [
@@ -14,10 +18,10 @@ import { DataSource } from 'typeorm';
       username: 'root',
       password: 'trung123',
       database: 'project-api-nej',
-      entities: [],
+      entities: [AccountEntity, CarsEntity, CategoritesEntity],
       synchronize: true,
     }),
-    ProductsModule],
+    ProductsModule, CategoriesModule],
   controllers: [AppController],
   providers: [AppService],
 })

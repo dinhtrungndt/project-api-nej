@@ -1,30 +1,28 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe } from "@nestjs/common";
-import { ProductService } from "./products.service";
+import { CategoriesService } from "./categories.service";
 import { ResponseData } from "src/global/globalClass";
 import { HttpMessage, HttpStatus } from "src/global/globalEnum";
 import { Product } from "src/models/product.model";
 import { ProductDto } from "src/dto/product.dto";
-import { CarsEntity } from "src/entities/cars.entity";
 
-@Controller('products')
-export class ProductController {
+@Controller('categories')
+export class CategoriesController {
     
-    constructor(private readonly productService: ProductService) {}
+    constructor(private readonly categoriesService: CategoriesService) {}
 
     @Get()
-    async getProducts(): Promise<ResponseData<CarsEntity[]>> {
+    getProducts(): ResponseData<Product[]>{
         try {
-            const products = await this.productService.getProducts();
-            return new ResponseData<CarsEntity[]>(products, HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+        return new ResponseData<Product[]>(this.categoriesService.getProducts(), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
-            return new ResponseData<CarsEntity[]>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+        return new ResponseData<Product[]>(null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
     }
 
     @Post()
     createProduct(@Body(new ValidationPipe()) productDto: ProductDto): ResponseData<ProductDto>{
         try {
-        return new ResponseData<Product>(this.productService.createProduct(productDto), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+        return new ResponseData<Product>(this.categoriesService.createProduct(productDto), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
         return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
@@ -33,7 +31,7 @@ export class ProductController {
     @Get('/:id')
     detailProduct(@Param('id') id: number): ResponseData<Product> {
         try {
-        return new ResponseData<Product>(this.productService.detailProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+        return new ResponseData<Product>(this.categoriesService.detailProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
         return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
@@ -42,7 +40,7 @@ export class ProductController {
     @Put('/:id')
     updateProduct(@Body() productDto: ProductDto, @Param('id') id: number): ResponseData<Product> {
         try {
-        return new ResponseData<Product>(this.productService.updateProduct(productDto, id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+        return new ResponseData<Product>(this.categoriesService.updateProduct(productDto, id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
         return new ResponseData<Product>(null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
@@ -51,7 +49,7 @@ export class ProductController {
     @Delete('/:id')
     deleteProduct(@Param('id') id: number): ResponseData<boolean>{
         try {
-        return new ResponseData<boolean>(this.productService.deleteProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
+        return new ResponseData<boolean>(this.categoriesService.deleteProduct(id), HttpStatus.SUCCESS, HttpMessage.SUCCESS);
         } catch (error) {
         return new ResponseData<boolean>(null, HttpStatus.ERROR, HttpMessage.ERROR);
         }
