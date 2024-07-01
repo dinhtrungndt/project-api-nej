@@ -1,13 +1,16 @@
 import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 
-@Entity('category')
-export class CategoritesEntity extends BaseEntity {
+@Entity('account')
+export class AccountEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number
 
     @Column()
-    name: string;
+    username: string;
 
     @Column()
-    desctiption: string;
+    email: string;
+    
+    @Column()
+    password: string;
 }
